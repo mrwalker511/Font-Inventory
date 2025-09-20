@@ -66,3 +66,47 @@ pip install -r requirements.txt
 ### Windows
 
 If activation fails on Windows, allow scripts once:
+
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+Usage
+Step 0: Build a seed list from registrar export (tools/scan.py)
+
+Linux/macOS:
+
+source .venv/bin/activate
+python tools/scan.py --csv path/to/domains.csv --out-csv domains_results.csv --out-seeds domains_live_seeds.txt
+
+
+Windows:
+
+.\.venv\Scripts\Activate.ps1
+python tools\\scan.py --csv path\\to\\domains.csv --out-csv domains_results.csv --out-seeds domains_live_seeds.txt
+
+Step 1: Crawl and inventory fonts (font_inventory.py)
+
+Linux/macOS:
+
+source .venv/bin/activate
+python font_inventory.py domains_live_seeds.txt --out out
+
+
+Windows:
+
+.\.venv\Scripts\Activate.ps1
+python font_inventory.py domains_live_seeds.txt --out out
+
+
+For rendered mode (JS-heavy sites):
+
+python font_inventory.py domains_live_seeds.txt --out out --rendered
+
+Output
+
+out/fonts.csv: unique fonts with metadata and hashes
+
+out/domains.csv: per-domain summary
+
+out/errors.csv: failed fetches
+
+out/fonts.json: full structured report
