@@ -21,17 +21,17 @@ Font Inventory is a free, auditable crawler that discovers the web fonts your or
 
 ## Repository layout
 
-## font-inventory/
-## ├── font_inventory.py # main crawler
-## ├── tools/
-## │ └── scan.py # build live seed list from registrar CSV (Step 0)
-## ├── examples/
-## │ ├── domains.txt
-## │ └── sample-output/
-## ├── requirements.txt
-## ├── README.md
-## ├── LICENSE
-## └── .gitignore
+### font-inventory/
+### ├── font_inventory.py # main crawler
+### ├── tools/
+### │ └── scan.py # build live seed list from registrar CSV (Step 0)
+### ├── examples/
+### │ ├── domains.txt
+### │ └── sample-output/
+### ├── requirements.txt
+### ├── README.md
+### ├── LICENSE
+### └── .gitignore
 
 ## Installation
 
@@ -51,19 +51,20 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 pip install -r requirements.txt
-# For rendered mode:
-# pip install playwright
-# playwright install
+
+#For rendered mode:
+pip install playwright
+playwright install
 
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
-# For rendered mode:
-# pip install playwright
-# python -m playwright install
+For rendered mode:
+pip install playwright
+python -m playwright install
 
-### Windows
+### Linux/macOS
 
 If activation fails on Windows, allow scripts once:
 
@@ -78,20 +79,20 @@ source .venv/bin/activate
 python tools/scan.py --csv path/to/domains.csv --out-csv domains_results.csv --out-seeds domains_live_seeds.txt
 
 
-Windows:
+### Windows:
 
 .\.venv\Scripts\Activate.ps1
 python tools\\scan.py --csv path\\to\\domains.csv --out-csv domains_results.csv --out-seeds domains_live_seeds.txt
 
 Step 1: Crawl and inventory fonts (font_inventory.py)
 
-Linux/macOS:
+### Linux/macOS:
 
 source .venv/bin/activate
 python font_inventory.py domains_live_seeds.txt --out out
 
 
-Windows:
+### Windows:
 
 .\.venv\Scripts\Activate.ps1
 python font_inventory.py domains_live_seeds.txt --out out
