@@ -21,17 +21,17 @@ Font Inventory is a free, auditable crawler that discovers the web fonts your or
 
 ## Repository layout
 
-font-inventory/
-├── font_inventory.py # main crawler
-├── tools/
-│ └── scan.py # build live seed list from registrar CSV (Step 0)
-├── examples/
-│ ├── domains.txt
-│ └── sample-output/
-├── requirements.txt
-├── README.md
-├── LICENSE
-└── .gitignore
+## font-inventory/
+## ├── font_inventory.py # main crawler
+## ├── tools/
+## │ └── scan.py # build live seed list from registrar CSV (Step 0)
+## ├── examples/
+## │ ├── domains.txt
+## │ └── sample-output/
+## ├── requirements.txt
+## ├── README.md
+## ├── LICENSE
+## └── .gitignore
 
 ## Installation
 
