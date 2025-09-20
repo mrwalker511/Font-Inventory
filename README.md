@@ -1,6 +1,9 @@
 # Font Inventory
 
-Font Inventory is a free, auditable crawler that discovers the web fonts your organization serves across public domains. It outputs CSV and JSON so you can reconcile usage with your font licenses.
+Font Inventory is a free, auditable crawler that discovers the web fonts your organization serves across public domains.  
+It outputs CSV and JSON so you can reconcile usage with your font licenses.
+
+---
 
 ## What it does
 
@@ -8,35 +11,46 @@ Font Inventory is a free, auditable crawler that discovers the web fonts your or
 - Optionally renders pages in a headless browser to capture fonts loaded dynamically by JavaScript (SPA/React/Next.js, etc.).
 - Downloads font binaries (WOFF/WOFF2/TTF/OTF), reads name tables via fontTools, and de-duplicates by SHA-256 hash.
 - Respects `robots.txt`.
-- Produces four reports: `fonts.csv`, `domains.csv`, `errors.csv`, and `fonts.json`.
+- Produces four reports:  
+  - `fonts.csv`  
+  - `domains.csv`  
+  - `errors.csv`  
+  - `fonts.json`
+
+---
 
 ## Why it’s different
 
-- Transparent, self-hosted, and auditable (no data leaves your environment).
-- Binary-level fingerprinting (hashing) avoids false positives when files are renamed or subset.
-- Real font metadata (family, subfamily, full name, PostScript name, version).
-- Two crawl modes:
-  - **Static**: fast HTML/CSS parsing.
-  - **Rendered**: Playwright-powered network capture for JS-injected fonts.
+- Transparent, self-hosted, and auditable (no data leaves your environment).  
+- Binary-level fingerprinting (hashing) avoids false positives when files are renamed or subset.  
+- Real font metadata (family, subfamily, full name, PostScript name, version).  
+- Two crawl modes:  
+  - **Static**: fast HTML/CSS parsing.  
+  - **Rendered**: Playwright-powered network capture for JS-injected fonts.  
+
+---
 
 ## Repository layout
 
-### font-inventory/
-### ├── font_inventory.py # main crawler
-### ├── tools/
-### │ └── scan.py # build live seed list from registrar CSV (Step 0)
-### ├── examples/
-### │ ├── domains.txt
-### │ └── sample-output/
-### ├── requirements.txt
-### ├── README.md
-### ├── LICENSE
-### └── .gitignore
+```text
+font-inventory/
+├── font_inventory.py        # main crawler
+├── tools/
+│   └── scan.py              # build live seed list from registrar CSV (Step 0)
+├── examples/
+│   ├── domains.txt
+│   └── sample-output/
+├── requirements.txt
+├── README.md
+├── LICENSE
+└── .gitignore
+```
+
+# Installation & Usage
 
 ## Installation
 
 ### Prerequisites
-
 - Python 3.10+ recommended
 - Internet access to crawl your sites
 - Optional for rendered mode: Playwright (Chromium)
@@ -52,62 +66,77 @@ source .venv/bin/activate
 
 pip install -r requirements.txt
 
-#For rendered mode:
-pip install playwright
-playwright install
+# For rendered mode:
+# pip install playwright
+# playwright install
+```
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/your-org/font-inventory.git
+cd font-inventory
 
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
-For rendered mode:
-pip install playwright
-python -m playwright install
 
-### Linux/macOS
+# For rendered mode:
+# pip install playwright
+# python -m playwright install
+```
 
 If activation fails on Windows, allow scripts once:
 
+```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
 
-Usage
-Step 0: Build a seed list from registrar export (tools/scan.py)
+---
 
-Linux/macOS:
+## Usage
 
+### Step 0: Build a seed list from registrar export (`tools/scan.py`)
+
+#### Linux/macOS
+```bash
 source .venv/bin/activate
 python tools/scan.py --csv path/to/domains.csv --out-csv domains_results.csv --out-seeds domains_live_seeds.txt
+```
 
-
-### Windows:
-
+#### Windows (PowerShell)
+```powershell
 .\.venv\Scripts\Activate.ps1
-python tools\\scan.py --csv path\\to\\domains.csv --out-csv domains_results.csv --out-seeds domains_live_seeds.txt
+python tools\scan.py --csv path	o\domains.csv --out-csv domains_results.csv --out-seeds domains_live_seeds.txt
+```
 
-Step 1: Crawl and inventory fonts (font_inventory.py)
+---
 
-### Linux/macOS:
+### Step 1: Crawl and inventory fonts (`font_inventory.py`)
 
+#### Linux/macOS
+```bash
 source .venv/bin/activate
 python font_inventory.py domains_live_seeds.txt --out out
+```
 
-
-### Windows:
-
+#### Windows (PowerShell)
+```powershell
 .\.venv\Scripts\Activate.ps1
 python font_inventory.py domains_live_seeds.txt --out out
+```
 
-
-For rendered mode (JS-heavy sites):
-
+#### For JS-heavy sites (enable rendered mode)
+```bash
 python font_inventory.py domains_live_seeds.txt --out out --rendered
+```
 
-Output
+---
 
-out/fonts.csv: unique fonts with metadata and hashes
+## Output
 
-out/domains.csv: per-domain summary
-
-out/errors.csv: failed fetches
-
-out/fonts.json: full structured report
+- `out/fonts.csv` – unique fonts with metadata and hashes
+- `out/domains.csv` – per-domain summary
+- `out/errors.csv` – failed fetches
+- `out/fonts.json` – full structured report
