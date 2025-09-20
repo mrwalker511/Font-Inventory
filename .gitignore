@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.dist/
+.build/
+.cache/
+.venv/
+venv/
+env/
+
+# Playwright
+playwright/.cache/
+
+# OS
+.DS_Store
+Thumbs.db

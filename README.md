@@ -55,9 +55,6 @@ pip install -r requirements.txt
 # pip install playwright
 # playwright install
 
-git clone https://github.com/your-org/font-inventory.git
-cd font-inventory
-
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
@@ -66,6 +63,6 @@ pip install -r requirements.txt
 # pip install playwright
 # python -m playwright install
 
-If activation fails on Windows, allow scripts once:
+### Windows
 
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+If activation fails on Windows, allow scripts once:
